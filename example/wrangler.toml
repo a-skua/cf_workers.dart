@@ -1,0 +1,4 @@
+#:schema node_modules/wrangler/config-schema.json
+name = ""
+main = "example.js"
+compatibility_flags = ["nodejs_compat"]

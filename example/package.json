@@ -1,0 +1,13 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "cf_workers_example.js",
+  "keywords": [],
+  "author": "asuka",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.57.0"
+  }
+}
