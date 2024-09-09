@@ -1,9 +1,11 @@
 import 'package:http/http.dart';
 import 'package:cf_workers/cf_workers.dart';
+import 'package:cf_workers/http.dart';
 
 Future<void> main() {
-  return Workers((Request request) async {
-    print(request);
-    return Response("Hello, World!", 200);
+  return Workers((JSRequest request) async {
+    print(await request.toDart);
+
+    return fetch(Request('GET', Uri.parse('https://example.com')).toJS);
   }).serve();
 }

@@ -1,10 +1,7 @@
 library;
 
 import 'dart:js_interop';
-import 'package:http/http.dart';
-import 'src/http.dart';
-
-typedef Handler = Future<Response> Function(Request);
+import 'src/http/types.dart';
 
 /// A function that returns a Request object in JavaScript.
 ///
@@ -30,17 +27,19 @@ external JSRequest request();
 @JS('__dart_cf_workers.response')
 external void response(JSResponse response);
 
+typedef Handler = Future<JSResponse> Function(JSRequest);
+
 /// A class that handles requests from Cloudflare Workers.
 ///
 /// Usage:
 ///
 /// ```dart
 /// import 'package:http/http.dart';
-/// import 'package:cf_workers/workers.dart';
+/// import 'package:cf_workers/cf_workers.dart';
 ///
 /// Future<void> main() {
-///   return Workers((Request request) async {
-///     return Response('Hello, World!', 200);
+///   return Workers((JSRequest request) async {
+///     return Response('Hello, World!', 200).toJS;
 ///   }).serve();
 /// }
 /// ```
@@ -50,6 +49,6 @@ class Workers {
   Workers(this.handler);
 
   Future<void> serve() async {
-    response((await handler(await request().toDart)).toJS);
+    response((await handler(request())));
   }
 }
