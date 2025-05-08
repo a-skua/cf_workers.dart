@@ -1,4 +1,4 @@
 #:schema node_modules/wrangler/config-schema.json
 name = ""
-main = "example.js"
-compatibility_flags = ["nodejs_compat"]
+main = "main.js"
+compatibility_date = "2025-05-07"
