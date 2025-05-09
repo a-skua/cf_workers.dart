@@ -1,35 +1,31 @@
 # Cloudflare Workers.dart
 
+- [pub.dev](https://pub.dev/packages/cf_workers)
+- [Cloudflare Doc](https://developers.cloudflare.com/workers/)
+
 ## Usage
 
 ```dart
-import 'package:http/http.dart';
-import 'package:cf_workers/cf_workers.dart';
+// example/workers.dart
+import 'package:cf_workers/workers.dart';
 
-Future<void> main() {
-  return Workers((JSRequest request) async {
-    return Response("Hello, World!", 200).toJS;
-  }).serve();
+main() => fetch(_handler, property: '__dart_fetch');
+
+Future<Response> _handler(Request request, Env env, Context context) async {
+  final assets = env['ASSETS'];
+  print('Assets: $assets');
+
+  return Response('Hello, Dart!'.toJS);
 }
 ```
 
-```sh
-dart compile wasm bin/api.dart -p __dart/api.wasm
-```
-
 ```js
-import { instantiate, invoke } from "./__dart/api.mjs";
-import dartModule from "./__dart/api.wasm";
-import { exec } from "./web/exec.mjs";
+// example/main.js
+import { instantiate, invoke } from "./workers.mjs";
+import dartModule from "./workers.wasm";
 
-export default {
-  async fetch(request, _env, _ctx) {
-    const dartInstance = await instantiate(dartModule);
-    return exec(() => invoke(dartInstance), request);
-  },
-};
-```
+const dartInstance = await instantiate(dartModule);
+invoke(dartInstance);
 
-```sh
-npx wrangler dev
+export default { fetch: __dart_fetch };
 ```
