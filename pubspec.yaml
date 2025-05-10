@@ -1,6 +1,6 @@
 name: cf_workers
 description: Cloudflare Workers Dart
-version: 2025.5.10-1
+version: 2025.5.10-2
 repository: https://github.com/a-skua/cf_workers.dart
 
 environment:
