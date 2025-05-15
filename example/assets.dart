@@ -17,5 +17,11 @@ Future<Response> _handler(Request request, Env env, Context ctx) async {
     return Response(String('Hello, $name!'));
   }
 
+  if (uri.path.startsWith('/assets/')) {
+    final path = uri.path.substring(7);
+    final request = Request(String(uri.replace(path: path).toString()));
     return env.assets.fetch(request, env, ctx).toDart;
+  }
+
+  return env.assets.fetch(request, env, ctx).toDart;
 }
