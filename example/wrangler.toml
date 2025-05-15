@@ -1,4 +1,8 @@
 #:schema node_modules/wrangler/config-schema.json
 name = ""
-main = "main.js"
+main = "assets.js"
 compatibility_date = "2025-05-07"
+
+[assets]
+directory = "assets"
+binding = "ASSETS"

@@ -1,12 +1,3 @@
-# Cloudflare Workers.dart
-
-- [pub.dev](https://pub.dev/packages/cf_workers)
-- [Cloudflare Doc](https://developers.cloudflare.com/workers/)
-
-## Usage
-
-```dart
-// example/assets.dart
 import 'dart:js_interop';
 import 'package:poor_web/js.dart';
 import 'package:cf_workers/cf_workers.dart';
@@ -28,15 +19,3 @@ Future<Response> _handler(Request request, Env env, Context ctx) async {
 
     return env.assets.fetch(request, env, ctx).toDart;
 }
-```
-
-```js
-// example/assets.js
-import { instantiate, invoke } from "./assets.mjs";
-import dartModule from "./assets.wasm";
-
-const dartInstance = await instantiate(dartModule);
-invoke(dartInstance);
-
-export default __fetcher;
-```

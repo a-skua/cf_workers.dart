@@ -1,7 +1,8 @@
 SRC := $(shell find lib -name '*.dart')
 
 .PHONY: example
-example: example/workers.wasm
+example:
+	@$(MAKE) -C example
 
 .PHONY: clean
 clean:
@@ -14,6 +15,10 @@ fmt:
 .PHONY: doc
 doc: doc/api/index.html
 	python3 -m http.server -d doc/api
+
+.PHONY: check
+check:
+	@dart pub publish --dry-run
 
 %.wasm: %.dart $(SRC)
 	@dart compile wasm $< -o $@
