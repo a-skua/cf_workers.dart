@@ -1,3 +1,17 @@
+## 2025.5.16
+
+You can write like this.
+
+```dart
+@JS('__dart_fetch')
+external set fetcher(Fetcher _);
+
+main() => fetcher = Fetcher(_handler);
+
+Future<Response> _handler(Request request, Env env, Context ctx) async =>
+    Response(String('Hello, Dart!'));
+```
+
 ## 2025.5.15 Braking Change
 
 ```dart
